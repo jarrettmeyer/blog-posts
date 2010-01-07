@@ -1,2 +1,6 @@
-./src/MvcReports/*.*
-./src/MvcReports/**/*.*
+src/**/*.user
+src/**/*.suo
+src/**/**/*.user
+
+src/**/**/bin/
+src/**/**/obj/
