@@ -1,18 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Routing;
+﻿using System.Web.Routing;
+using MvcGrid1.Core.Controllers;
+using MvcGrid1.Core.Lib;
 using MvcGrid1.Core.Lib.Startup;
+using Ninject;
+using Ninject.Web.Mvc;
 
 namespace MvcGrid1.Web
 {
-    public class MvcApplication : HttpApplication
+    public class MvcApplication : NinjectHttpApplication
     {
-        protected void Application_Start()
+        protected override IKernel CreateKernel()
         {
-            RouteRegistrar.RegisterRoutes(RouteTable.Routes);            
-        }        
+            return AppScope.BuildKernel();
+        }
+
+        protected override void OnApplicationStarted()
+        {
+            RouteRegistrar.RegisterRoutes(RouteTable.Routes);
+            var assembly = typeof(ApplicationController).Assembly;
+            RegisterAllControllersIn(assembly);
+        }
     }
 }

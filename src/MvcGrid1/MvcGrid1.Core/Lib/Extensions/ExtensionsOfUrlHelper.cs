@@ -13,7 +13,7 @@ namespace MvcGrid1.Core.Lib.Extensions
         public static string IncludeJs(this UrlHelper url, string js)
         {
             var path = string.Format("~/Content/Scripts/{0}", js);
-            return url.Content(path);
+            return string.Format("<script type=\"text/javascript\" lang=\"javascript\" src=\"{0}\"></script>", url.Content(path));
         }
     }
 }
