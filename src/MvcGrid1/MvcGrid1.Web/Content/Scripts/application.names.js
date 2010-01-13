@@ -4,7 +4,7 @@
         hideEditLinks();
         var row = $(this).parents("tr");
         var rowId = row[0].id.match(/(\d+)/)[1];
-        $(this).parents("form").attr("action", "/names/update");
+        //$(this).parents("form").attr("action", "/names/update");
         $.get("/names/edit/" + rowId, {}, function(html) {
             row.replaceWith(html);
             registerUpdateButton();
@@ -14,7 +14,7 @@
     $("#addNameLink").click(function(e) {
         e.preventDefault();
         hideEditLinks();
-        $(this).parents("form").attr("action", "/names/create");
+        //$(this).parents("form").attr("action", "/names/create");
         $.get("/names/new", {}, function(html) {
             $("tbody").append(html);
             registerCreateButton();
@@ -42,33 +42,29 @@
     }
     function registerCreateButton() {
         $("#createRowButton").click(function(e) {
-            e.preventDefault();
-            var formData = $(this).parents("form").serialize();
-            var rowId = $("#Id").val();
-            var selector = "tr#name-" + rowId;
-            $.post("/names/create", formData, function(html) {
-            $(selector).replaceWith(html);
-                $("tbody tr:last").effect("highlight", {}, 3000);
-                showEditLinks();
-            });
+            submitForm(this, e, "/names/create", true);
         });
     }
     function registerUpdateButton() {
         $("#updateRowButton").click(function(e) {
-            e.preventDefault();
-            var formData = $(this).parents("form").serialize();
-            var rowId = $("#Id").val();
-            var selector = "tr#name-" + rowId;
-            $.post("/names/update", formData, function(html) {
-                $(selector).replaceWith(html);
-                $(selector).effect("highlight", {}, 3000);
-                showEditLinks();
-            });
+            submitForm(this, e, "/names/update", false);
         });
     }
     function showEditLinks() {
         $(".edit-link").show();
         $("#addNameLink").parents("tr").show();
+    }
+    function submitForm(element, event, url, isNew) {
+        event.preventDefault();
+        var formData = $(element).parents("form").serialize();
+        var rowId = $("#Id").val();
+        var selector = "tr#name-" + rowId;
+        $.post(url, formData, function(html) {
+            $(selector).replaceWith(html);
+            var flashRow = isNew ? "tbody tr:last" : selector;
+            $(flashRow).effect("highlight", {}, 3000);
+            showEditLinks();
+        });
     }
 });
 
