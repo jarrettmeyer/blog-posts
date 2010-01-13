@@ -74,6 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Scripts\application.names.js" />
+    <Content Include="Content\Scripts\jquery-ui-1.7.2.custom.min.js" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Views\Names\Details.aspx" />

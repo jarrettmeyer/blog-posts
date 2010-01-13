@@ -14,9 +14,9 @@
     <table id="names-table" style="width:99%;">
         <thead>
             <tr>
-                <td style="width:40%;">Last</td>
-                <td style="width:40%;">First</td>
-                <td style="width:19%;">&nbsp;</td>
+                <td style="width:40%;font-weight:bold;background-color:#ddd;">Last</td>
+                <td style="width:40%;font-weight:bold;background-color:#ddd;">First</td>
+                <td style="width:19%;font-weight:bold;background-color:#ddd;">&nbsp;</td>
             </tr>
         </thead>
         <tbody>

@@ -46,8 +46,9 @@
             var formData = $(this).parents("form").serialize();
             var rowId = $("#Id").val();
             var selector = "tr#name-" + rowId;
-            $.post("/names/create", formData, function(html) {                
-                $(selector).replaceWith(html);
+            $.post("/names/create", formData, function(html) {
+            $(selector).replaceWith(html);
+                $("tbody tr:last").effect("highlight", {}, 3000);
                 showEditLinks();
             });
         });
@@ -60,6 +61,7 @@
             var selector = "tr#name-" + rowId;
             $.post("/names/update", formData, function(html) {
                 $(selector).replaceWith(html);
+                $(selector).effect("highlight", {}, 3000);
                 showEditLinks();
             });
         });
